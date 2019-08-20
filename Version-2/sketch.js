@@ -2,7 +2,7 @@ const boids = [];
 
 function setup(){
 	createCanvas(640, 360);
-	for(let i = 0; i < 150; i++){
+	for(let i = 0; i < 100; i++){
 		boids.push(new Boid());
 	}
 }

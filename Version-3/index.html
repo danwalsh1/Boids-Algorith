@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Boids Algorithm</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+		<script src="boid.js"></script>
+		<script src="sketch.js"></script>
+	</head>
+	<body>
+		<h2><u>Boids Algorithm</u></h2>
+		<h3>Version 3</h3>
+		<p>This version of the algorithm allows you to control the three forces that act upon each Boid.</p>
+		<p><i>This version of the algorithm has had the changed code commented. This is mainly inside of the flock() function.</i></p>
+		<hr />
+		<br />
+		<div id="canvasContainer"></div>
+		<br />
+		<hr />
+		<form>
+			<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;">
+				<tr>
+					<th style="border: 1px solid black; text-align: center;">Alignment</th>
+					<th style="border: 1px solid black; text-align: center;">Seperation</th>
+					<th style="border: 1px solid black; text-align: center;">Cohesion</th>
+				</tr>
+				<tr>
+					<td style="border: 1px solid black; text-align: center;">
+						<div id="alignmentSliderContainer"></div>
+					</td>
+					<td style="border: 1px solid black; text-align: center;">
+						<div id="seperationSliderContainer"></div>
+					</td>
+					<td style="border: 1px solid black; text-align: center;">
+						<div id="cohesionSliderContainer"></div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
