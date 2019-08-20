@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Boids Algorithm</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+		<script src="boid.js"></script>
+		<script src="sketch.js"></script>
+	</head>
+	<body>
+		<h2><u>Boids Algorithm</u></h2>
+		<p>Boids algorithm was developed by Craig Reynolds. More information can be found <a href="https://en.wikipedia.org/wiki/Boids" target="_blank">HERE</a>.</p>
+		<p>I saw a <a href="https://www.youtube.com/watch?v=mhjuuHl6qHM" target="_blank">YouTube video</a> about this algorithm and decided to play around with it.</p>
+		<p>I have made multiple version of this algorithm, giving different user controls and changing parts of the code to allow the algorithm to work in different ways. Below, is a contents table linking to the different versions of the algorithm and what the key difference is between the versions</p>
+		<hr />
+		<br />
+		<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;">
+			<tr>
+				<th style="border: 1px solid black; text-align: center;">Algorithm Version</th>
+				<th style="border: 1px solid black; text-align: center;">Details</th>
+			</tr>
+			<tr>
+				<td style="border: 1px solid black; text-align: center;"><a href="Version-1/index.html">Version 1</a></td>
+				<td style="border: 1px solid black; text-align: center;">This is my initial version of the Boids algorithm. This code is fully commented which explains some of the theories used in the algorithm. However, this version does have noticable clumping which indicated that the seperation of Boids wasn't as effective as needed.</td>
+			</tr>
+			<tr>
+				<td style="border: 1px solid black; text-align: center;"><a href="Version-2/index.html">Version 2</a></td>
+				<td style="border: 1px solid black; text-align: center;"><i>This version is not commented.</i> In this version, the three forces have been weighted, with seperation being given a higher weight than the other two forces. This results in "flocking" that seems more natural and doesn't allow for clumping as much as Version 1 did.</td>
+			</tr>
+		</table>
+		<br />
+		<hr />
+		<h3>ToDo:</h3>
+		<ol type="I">
+			<li>User controls force weights.</li>
+			<li>Complex user controls.</li>
+			<li>Allow Boids to have difference parameters.</li>
+			<li>Boids only have a "view" rather than a full radius.</li>
+			<li>Optimise algorithm for larger number of Boids (sub-division).</li>
+		</ol>
+	</body>
+</html>
