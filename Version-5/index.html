@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Boids Algorithm</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+		<script src="boid.js"></script>
+		<script src="quadtree.js"></script>
+		<script src="sketch.js"></script>
+	</head>
+	<body>
+		<h2><u>Boids Algorithm</u></h2>
+		<h3>Version 5</h3>
+		<p>This version of the algorithm uses a QuadTree to store the position of each boid. More information can be found <a href="https://en.wikipedia.org/wiki/Quadtree">HERE</a>. This means that each node splits into four smaller node if it contains more Boids than it's capacity. This version is using a QuadTree that has a maximum capacity of ten Boids per node. This can be seen visually by ticking the "Show QuadTree" setting. This version also allows you to Play/Pause the algorithm using the "Play" setting.</p>
+		<p><b>Comparison:</b><br />
+		When testing Version 4 with 300 Boids, the average Frame Rate was <span style="background-color: #ff8c7d;">22.1 FPS</span> (Frames Per Second).<br />
+		When testing Version 5 with 300 Boids, the average Frame Rate was <span style="background-color: #ffee7d;">33.2 FPS</span>. This was with each "quad" in the quad tree having a maximum capacity of 4 Boids.<br />
+		When testing Version 5 with 300 Boids and a maximum capacity of 10 Boids per "quad", the average Frame Rate was <span style="background-color: #8aff7d;">56.3 FPS</span>.</p>
+		<p>While the Frame Rate will be effected by the hardware of the machine running the code, this does show that the use of a QuadTree does decrease the amount of comparisons each Boid has to make and therefore gives a net increase to the speed of the algorithm.</p>
+		<p><i>This version of the algorithm has had the changed code commented.</i></p>
+		<hr />
+		<br />
+		<div id="canvasContainer"></div>
+		<br />
+		<hr />
+		<table>
+			<tr>
+				<td>
+					<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;" align="center">
+						<tr>
+							<th style="border: 1px solid black; text-align: center;" colspan="2">Forces</th>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Alignment</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="alignmentSliderContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Seperation</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="seperationSliderContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Cohesion</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="cohesionSliderContainer"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;" align="center">
+						<tr>
+							<th style="border: 1px solid black; text-align: center;" colspan="2">Constraints</th>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Max Speed</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="maxSpeedSliderContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Max Force</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="maxForceSliderContainer"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;" align="center">
+						<tr>
+							<th style="border: 1px solid black; text-align: center;" colspan="2">Perception Radius</th>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Alignment</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="alignmentRadiusSliderContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Seperation</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="seperationRadiusSliderContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Cohesion</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="cohesionRadiusSliderContainer"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;" align="center">
+						<tr>
+							<th style="border: 1px solid black; text-align: center;" colspan="2">World Size</th>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Width</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="canvasWidthSliderContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Height</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="canvasHeightSliderContainer"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table style="border: 1px solid black; border-collapse: collapse; max-width:75%;" align="center">
+						<tr>
+							<th style="border: 1px solid black; text-align: center;" colspan="2">Settings</th>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Play</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="playCheckboxContainer"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black; text-align: center;">Show QuadTree</td>
+							<td style="border: 1px solid black; text-align: center;">
+								<div id="quadtreeCheckboxSliderContainer"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
